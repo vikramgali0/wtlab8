@@ -1,0 +1,146 @@
+{% extends 'employees/base.html' %}
+
+{% block title %}{{ employee.name }} - Employee Details{% endblock %}
+
+{% block extra_css %}
+<style>
+    .detail-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid #667eea;
+    }
+    
+    .detail-header h2 {
+        color: #667eea;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+    
+    .detail-header .employee-id {
+        background: #667eea;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 8px;
+        display: inline-block;
+        font-size: 1.1em;
+    }
+    
+    .detail-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+    
+    .detail-section {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 25px;
+        border-radius: 12px;
+        border-left: 5px solid #667eea;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .detail-section h3 {
+        color: #667eea;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 10px;
+    }
+    
+    .detail-item {
+        margin: 15px 0;
+        padding: 10px;
+        background: white;
+        border-radius: 8px;
+    }
+    
+    .detail-item label {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.9em;
+        text-transform: uppercase;
+        color: #667eea;
+    }
+    
+    .detail-item .value {
+        color: #555;
+        font-size: 1.1em;
+    }
+    
+    .actions {
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 30px;
+        border-top: 2px solid #eee;
+    }
+    
+    .actions .btn {
+        margin: 0 10px;
+    }
+    
+    .salary-badge {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+        margin: 20px 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="detail-header">
+    <h2>{{ employee.name }}</h2>
+    <div class="employee-id">Employee ID: {{ employee.EMPLOYEE_ID }}</div>
+</div>
+
+<div class="detail-content">
+    <div class="detail-section">
+        <h3>📧 Contact Information</h3>
+        <div class="detail-item">
+            <label>Email Address</label>
+            <div class="value">{{ employee.email }}</div>
+        </div>
+        <div class="detail-item">
+            <label>Phone Number</label>
+            <div class="value">{{ employee.phone }}</div>
+        </div>
+        <div class="detail-item">
+            <label>Address</label>
+            <div class="value">{{ employee.address }}</div>
+        </div>
+    </div>
+    
+    <div class="detail-section">
+        <h3>💼 Professional Details</h3>
+        <div class="detail-item">
+            <label>Department</label>
+            <div class="value">{{ employee.department }}</div>
+        </div>
+        <div class="detail-item">
+            <label>Position</label>
+            <div class="value">{{ employee.position }}</div>
+        </div>
+        <div class="detail-item">
+            <label>Hire Date</label>
+            <div class="value">{{ employee.hire_date|date:"F d, Y" }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="salary-badge">
+    💰 Salary: ${{ employee.salary|floatformat:2 }}
+</div>
+
+<div class="actions">
+    <a href="{% url 'employees:employee_list' %}" class="btn btn-secondary">← Back to Employee List</a>
+</div>
+{% endblock %}
+
